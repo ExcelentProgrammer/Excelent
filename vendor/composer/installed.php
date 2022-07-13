@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => 'excelentprogrammer/excelent',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '83b9e34d3a57694e8b2b3702cffb9b63e93235e6',
+        'name' => 'excelent/excelent',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'd476f8079f99447f23c613a2ea3ee20c4e08e6b3',
         'type' => 'template',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'excelentprogrammer/excelent' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '83b9e34d3a57694e8b2b3702cffb9b63e93235e6',
+        'excelent/excelent' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'd476f8079f99447f23c613a2ea3ee20c4e08e6b3',
             'type' => 'template',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
