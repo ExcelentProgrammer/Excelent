@@ -1,0 +1,171 @@
+<?php
+error_reporting(0);
+class argv
+{
+    function __construct()
+    {
+        $this->controller = $controller = "new:controller";
+        $this->model = $model = "new:model";
+        $this->DeleteModel = $DeleteModel = "del:model";
+        $this->Helpers = $Helpers = "new:helper";
+        $this->DeleteHelpers = $DeleteHelpers = "del:helper";
+        $this->DeleteController = $DeleteController = "del:controller";
+        $this->check = false;
+        global $argv;
+
+        $this->a1 = $a1 = $argv[1];
+        $this->a2 = $a2 = $argv[2];
+        $this->a3 = $a3 = $argv[3];
+        if ($a1 == $Helpers) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Yordamchi Funcsiya nomini Kiritmadinggiz", "e");
+            } else {
+                if (file_exists("App/Helpers/$a2.php")) {
+                    $this->console("Yordamchi Funcsiya Mavjud", "e");
+                } else {
+                    $this->console("Yordamchi Funcsiya Yaratilmoqda...", "w");
+                    $file = file_get_contents("Excelent/Layout/Helpers.php");
+                    $file = str_replace("HelpersName", $a2, $file);
+                    $res = file_put_contents("App/Helpers/" . $a2 . ".php", $file);
+                    if (!$res) {
+                        $this->console("Yordamchi Funcsiya yaratishda xatolik yuz berdi", "e");
+                    } else {
+                        sleep(1);
+                        $this->console("Yordamchi Funcsiya Yaratildi", "s");
+                    }
+                }
+            }
+        }
+        if ($a1 == $controller) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Controller nomini Kiritmadinggiz", "e");
+            } else {
+                if (strtolower($a2) == "controller") {
+                    $this->console("Controller nomi Controller bo'lishi mumkun emas iltimos boshqa Nomdan foydalaning", "e");
+                } else {
+                    if (file_exists("App/Controller/$a2.php")) {
+                        $this->console("Controller Mavjud", "e");
+                    } else {
+                        $this->console("Controller Yaratilmoqda...", "w");
+                        $file = file_get_contents("Excelent/Layout/controller.php");
+                        $file = str_replace("ControllerName", $a2, $file);
+                        $res = file_put_contents("App/Controller/" . $a2 . ".php", $file);
+                        if (!$res) {
+                            $this->console("Controller yaratishda xatolik yuz berdi", "e");
+                        } else {
+                            sleep(1);
+                            $this->console("Controller Yaratildi", "s");
+                        }
+                    }
+                }
+            }
+        }
+        if ($a1 == $model) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Model nomini Kiritmadinggiz", "e");
+            } else {
+                if (strtolower($a2) == "model") {
+                    $this->console("Model nomi Model bo'lishi mumkun emas iltimos boshqa Nomdan foydalaning", "e");
+                } else {
+                    if (file_exists("App/Model/$a2.php")) {
+                        $this->console("Model Mavjud", "e");
+                    } else {
+                        $this->console("Model Yaratilmoqda...", "w");
+                        $file = file_get_contents("Excelent/Layout/model.php");
+                        $file = str_replace("ModelName", $a2, $file);
+                        $res = file_put_contents("App/Model/" . $a2 . ".php", $file);
+                        if (!$res) {
+                            $this->console("Model yaratishda xatolik yuz berdi", "e");
+                        } else {
+                            sleep(1);
+                            $this->console("Model Yaratildi", "s");
+                        }
+                    }
+                }
+            }
+        }
+        if ($a1 == $DeleteModel) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Model Nomini Kiriting", "e");
+            } else {
+                if (!file_exists("App/Model/$a2.php")) {
+                    $this->console("Controller mavjud emas", "i");
+                } else {
+                    if (strtolower($a2) == "model" or strtolower($a2) == "user") {
+                        $this->console("Asosiy Modelni O'chish taqiqlangan", "e");
+                    } else {
+                        unlink("App/Model/$a2.php");
+                        $this->console("Model O'chirildi", "s");
+                    }
+                }
+            }
+        }
+        if ($a1 == $DeleteHelpers) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Yordamchi Funcsiya Nomini Kiriting", "e");
+            } else {
+                if (!file_exists("App/Helpers/$a2.php")) {
+                    $this->console("Yordamchi Funcsiya mavjud emas", "i");
+                } else {
+                    unlink("App/Helpers/$a2.php");
+                    $this->console("Yordamchi Funcsiya O'chirildi", "s");
+                }
+            }
+        }
+        if ($a1 == $DeleteController) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Controller Nomini Kiriting", "e");
+            } else {
+                if (!file_exists("App/Controller/$a2.php")) {
+                    $this->console("Controller mavjud emas", "i");
+                } else {
+                    if (strtolower($a2) == "controller") {
+                        $this->console("Asosiy Controllerni O'chish taqiqlangan", "e");
+                    } else {
+                        unlink("App/Controller/$a2.php");
+                        $this->console("Controller O'chirildi", "s");
+                    }
+                }
+            }
+        }
+    }
+    function console($str, $type = 'i')
+    {
+        switch ($type) {
+            case 'e': //error
+                echo "\033[31m>>> $str <<< \033[0m\n";
+                break;
+            case 's': //success
+                echo "\033[32m||| $str ||| \033[0m\n";
+                break;
+            case 'w': //warning
+                echo "\033[33m<<< $str >>> \033[0m\n";
+                break;
+            case 'i': //info
+                echo "\033[36m--- $str --- \033[0m\n";
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+    function __destruct()
+    {
+        if (empty($this->a1) or $this->a2 == "--help" or !$this->check) {
+            $this->console("new:controller  * Yangi Controller yaratish", "i");
+            $this->console("new:model *  Yangi Model yaratish", "i");
+            $this->console("del:model *  Modelni o'chirish", "i");
+            $this->console("del:controller *  Controllerni o'chirish", "i");
+            $this->console("new:helper *  Yordamchi funcsiya yaratish", "i");
+            $this->console("del:helper *  Yordamchi funcsiyani o'chirish", "i");
+        }
+    }
+}
+
+new argv();

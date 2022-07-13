@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Excelent\\": "Excelent/",
+            "App\\": "App/"
+        },
+        "files": ["Excelent/Autoload.php"]
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.4",
+        "pecee/simple-router": "4.3.7.2"
+    }
+}
