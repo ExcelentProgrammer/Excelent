@@ -1,20 +1,20 @@
 <?php return array(
     'root' => array(
-        'name' => 'excelent/excelent',
+        'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'd476f8079f99447f23c613a2ea3ee20c4e08e6b3',
-        'type' => 'template',
+        'reference' => 'bf0af989d012ce6704e32bcd499dd925e97dfdf4',
+        'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'excelent/excelent' => array(
+        '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'd476f8079f99447f23c613a2ea3ee20c4e08e6b3',
-            'type' => 'template',
+            'reference' => 'bf0af989d012ce6704e32bcd499dd925e97dfdf4',
+            'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,

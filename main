@@ -7,15 +7,18 @@ class argv
         $this->controller = $controller = "new:controller";
         $this->model = $model = "new:model";
         $this->DeleteModel = $DeleteModel = "del:model";
+        $this->DeleteController = $DeleteController = "del:controller";
         $this->Helpers = $Helpers = "new:helper";
         $this->DeleteHelpers = $DeleteHelpers = "del:helper";
-        $this->DeleteController = $DeleteController = "del:controller";
+        $this->resource = $resource = "--resource";
         $this->check = false;
         global $argv;
 
         $this->a1 = $a1 = $argv[1];
         $this->a2 = $a2 = $argv[2];
         $this->a3 = $a3 = $argv[3];
+
+
         if ($a1 == $Helpers) {
             $this->check = true;
             if (empty($a2)) {
@@ -37,6 +40,21 @@ class argv
                 }
             }
         }
+
+        if ($a1 == $DeleteHelpers) {
+            $this->check = true;
+            if (empty($a2)) {
+                $this->console("Yordamchi Funcsiya Nomini Kiriting", "e");
+            } else {
+                if (!file_exists("App/Helpers/$a2.php")) {
+                    $this->console("Yordamchi Funcsiya mavjud emas", "i");
+                } else {
+                    unlink("App/Helpers/$a2.php");
+                    $this->console("Yordamchi Funcsiya O'chirildi", "s");
+                }
+            }
+        }
+
         if ($a1 == $controller) {
             $this->check = true;
             if (empty($a2)) {
@@ -49,8 +67,13 @@ class argv
                         $this->console("Controller Mavjud", "e");
                     } else {
                         $this->console("Controller Yaratilmoqda...", "w");
-                        $file = file_get_contents("Excelent/Layout/controller.php");
+                        if ($a3 == $resource) {
+                            $file = file_get_contents("Excelent/Layout/RController.php");
+                        } else {
+                            $file = file_get_contents("Excelent/Layout/controller.php");
+                        }
                         $file = str_replace("ControllerName", $a2, $file);
+
                         $res = file_put_contents("App/Controller/" . $a2 . ".php", $file);
                         if (!$res) {
                             $this->console("Controller yaratishda xatolik yuz berdi", "e");
@@ -104,19 +127,6 @@ class argv
                 }
             }
         }
-        if ($a1 == $DeleteHelpers) {
-            $this->check = true;
-            if (empty($a2)) {
-                $this->console("Yordamchi Funcsiya Nomini Kiriting", "e");
-            } else {
-                if (!file_exists("App/Helpers/$a2.php")) {
-                    $this->console("Yordamchi Funcsiya mavjud emas", "i");
-                } else {
-                    unlink("App/Helpers/$a2.php");
-                    $this->console("Yordamchi Funcsiya O'chirildi", "s");
-                }
-            }
-        }
         if ($a1 == $DeleteController) {
             $this->check = true;
             if (empty($a2)) {
@@ -161,9 +171,9 @@ class argv
             $this->console("new:controller  * Yangi Controller yaratish", "i");
             $this->console("new:model *  Yangi Model yaratish", "i");
             $this->console("del:model *  Modelni o'chirish", "i");
-            $this->console("del:controller *  Controllerni o'chirish", "i");
-            $this->console("new:helper *  Yordamchi funcsiya yaratish", "i");
             $this->console("del:helper *  Yordamchi funcsiyani o'chirish", "i");
+            $this->console("new:helper *  Yordamchi funcsiya yaratish", "i");
+            $this->console("del:controller *  Controllerni o'chirish", "i");
         }
     }
 }

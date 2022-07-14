@@ -1,7 +1,6 @@
 <?php
 ob_start();
 
-use App\Helpers\func;
 use App\Model\User;
 use Pecee\SimpleRouter\SimpleRouter;
 use Excelent\Error\Error;

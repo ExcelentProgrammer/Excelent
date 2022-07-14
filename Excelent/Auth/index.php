@@ -17,7 +17,7 @@ class Auth
     }
     static public function check()
     {
-        if ((count(Session::get("AUTH")) != 0))
+        if (!empty(Session::get("AUTH")))
             return true;
         return false;
     }
@@ -37,27 +37,33 @@ class Auth
     static public function getData($Data = ["*"])
     {
         $ID = Session::get("AUTH")['ID'];
-        $res = User::select($Data)->where(['ID' => $ID])->run()->Data[0];
-        if (is_array($Data)) {
-            if (count($Data) <= 1 and $Data[0] != "*") {
-                $res = $res[$Data[0]];
+        if (isset($ID)) {
+            $res = User::select($Data)->where(['ID' => $ID])->run()->Data[0];
+            if (is_array($Data)) {
+                if (count($Data) <= 1 and $Data[0] != "*") {
+                    $res = $res[$Data[0]];
+                }
+            } else {
+                $res = $res[$Data];
             }
+            return $res;
         }else{
-            $res = $res[$Data];
-        }
-        return $res;
-    }
-    static public function guest(){
-        if(self::check()){
             return false;
-        }else{
+        }
+    }
+    static public function guest()
+    {
+        if (self::check()) {
+            return false;
+        } else {
             return true;
         }
     }
-    static public function user(){
-        if(self::check()){
+    static public function user()
+    {
+        if (self::check()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

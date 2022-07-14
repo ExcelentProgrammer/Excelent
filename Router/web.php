@@ -4,9 +4,6 @@ use Pecee\SimpleRouter\SimpleRouter as Route;
 use Pecee\Http\Request;
 use Excelent\Error\Error;
 use App\Controller\Controller;
-use App\Controller\FilmController;
-use App\Controller\HomeController;
-use App\Controller\WatchController;
 
 /**
  * Routerlar uchun asosiy example
@@ -14,7 +11,9 @@ use App\Controller\WatchController;
  */
 Route::get("/",function(){
     return view("welcome");
-});
+})->name("Home");
+
+
 
 /**
  * Errorlar uchun bu ko'dlarni o'chirish mumkun emas
