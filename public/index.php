@@ -11,6 +11,9 @@ require_once "../vendor/autoload.php";
 
 require_once '../Router/web.php';
 
+require_once "../Excelent/Error/route.php";
+
+
 SimpleRouter::setDefaultNamespace('App\Controller');
 
 SimpleRouter::start();
